@@ -8,6 +8,8 @@
 #include "op.hpp"
 #include "pow.hpp"
 #include "sub.hpp"
+#include <iostream>
+#include <ctype.h>
 
 using namespace std;
 
@@ -16,21 +18,23 @@ class ConcreteFactory
 	public:
 		ConcreteFactory() {}
 
-		Base* getBase(char* a)
+		Base* getBase(char* c)
 		{
-			if(isdigit(c)) 
+			int ch = atof(c);
+			if(isdigit(ch)) 
 			{
-				return new Op(c);
+				double cha = atof(c);
+				return new Op(cha);
 			}
 		}
 
 		Base* getBase(char* a, Base* b, Base* c)
 		{
-			if(a == '+')
+			if(a[0] == '+')
 			{
 				return new Add(b, c);
 			}
-			if(a == '/')
+			if(a[0] == '/')
 			{
 				return new Div(b, c);
 			}
@@ -45,7 +49,7 @@ class ConcreteFactory
 					return new Mult(b, c);
 				}
 			}
-			if(a == '-')
+			if(a[0] == '-')
 			{
 				return new Sub(b, c);
 			}

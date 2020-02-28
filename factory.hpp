@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class factory {
+class Factory {
     
 public:
     Factory() {}
@@ -42,9 +42,9 @@ public:
             
         }
         
-        if (linker != nullptr) {
-            cout << linker->stringify() << ' ' << linker->evaluate();
-        }
+       // if (linker != nullptr) {
+       //     cout << linker->stringify() << ' ' << linker->evaluate();
+       // }
         
         return linker;
     }
