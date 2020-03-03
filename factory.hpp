@@ -22,7 +22,35 @@ public:
         Base* op2 = nullptr;
         Base* linker = nullptr;
         
-        if (2 < length) {
+        char curr = **input;
+        char save;
+        bool needsBases = false;
+        
+        for (int i = 0; i < length, ++i) {
+            if (isdigit(curr)) {
+                if (op1 == nullptr) {
+                    op1 = build->getBase(input);
+                }
+                else {
+                    op2 = build->getBase(input);
+                    if (needsBases == true) {
+                        linker = build->getBase(&&save, op1, op2);
+                        op1 = linker;
+                        op2 = nullptr;
+                        needsBases = false;
+                    }
+                }
+            }
+            else {
+                if (op2 == nullptr || linker == nullptr) {
+                    save = curr;
+                    needsBases = true;
+                }
+            }
+        }
+        
+        
+        /*if (2 < length) {
             
             op1 = build->getBase(input[0]);
             op2 = build->getBase(input[2]);
@@ -47,7 +75,7 @@ public:
        // if (linker != nullptr) {
        //     cout << linker->stringify() << ' ' << linker->evaluate();
        // }
-            cout << "Test 2\n";   
+            cout << "Test 2\n";   */
         return linker;
     }
     
