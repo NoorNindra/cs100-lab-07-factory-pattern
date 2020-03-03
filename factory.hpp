@@ -27,6 +27,8 @@ public:
             op1 = build->getBase(input[0]);
             op2 = build->getBase(input[2]);
             linker = build->getBase(input[1], op1, op2);
+
+            cout << "Test 1\n";
             
         }
         
@@ -45,7 +47,7 @@ public:
        // if (linker != nullptr) {
        //     cout << linker->stringify() << ' ' << linker->evaluate();
        // }
-        
+            cout << "Test 2\n";   
         return linker;
     }
     
