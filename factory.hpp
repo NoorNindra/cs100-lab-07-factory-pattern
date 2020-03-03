@@ -16,25 +16,30 @@ public:
     
     Base* parse(char** input, int length) {
         
-        ConcreteFactory* build = nullptr;
+        ConcreteFactory* build = new ConcreteFactory();
 
         Base* op1 = nullptr;
         Base* op2 = nullptr;
         Base* linker = nullptr;
         
-        char curr = **input;
+        char* currInput = *input;
+        char curr = *currInput;
         char save;
         bool needsBases = false;
-        
-        for (int i = 0; i < length, ++i) {
+
+        for (int i = 0; i < length; ++i) {
             if (isdigit(curr)) {
                 if (op1 == nullptr) {
-                    op1 = build->getBase(input);
+                    op1 = build->getBase(currInput);
+                    ++currInput;
+                    curr = *currInput;
                 }
                 else {
-                    op2 = build->getBase(input);
+                    op2 = build->getBase(currInput);
+                    ++currInput;
+                    curr = *currInput;
                     if (needsBases == true) {
-                        linker = build->getBase(&&save, op1, op2);
+                        linker = build->getBase(&save, op1, op2);
                         op1 = linker;
                         op2 = nullptr;
                         needsBases = false;
@@ -42,8 +47,10 @@ public:
                 }
             }
             else {
-                if (op2 == nullptr || linker == nullptr) {
+                if ((op2 == nullptr) && curr != ' ') {
                     save = curr;
+                    ++currInput;
+                    curr = *currInput;
                     needsBases = true;
                 }
             }

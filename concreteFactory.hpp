@@ -20,8 +20,7 @@ class ConcreteFactory
 
 		Base* getBase(char* c)
 		{
-			int ch = atof(c);
-			if(isdigit(ch)) 
+			if(isdigit(*c)) 
 			{
 				double cha = atof(c);
 				return new Op(cha);
