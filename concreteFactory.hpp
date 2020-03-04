@@ -29,17 +29,18 @@ class ConcreteFactory
 
 		Base* getBase(char* a, Base* b, Base* c)
 		{
-			if(a[0] == '+')
+			if(*a == '+')
 			{
 				return new Add(b, c);
 			}
-			if(a[0] == '/')
+			if(*a == '/')
 			{
 				return new Div(b, c);
 			}
-			if(a[0] == '*')
+			if(*a == '*')
 			{
-				if(a[1] == '*')
+                                ++a;
+				if(*a == '*')
 				{
 					return new Pow(b,c);
 				}
@@ -48,7 +49,7 @@ class ConcreteFactory
 					return new Mult(b, c);
 				}
 			}
-			if(a[0] == '-')
+			if(*a == '-')
 			{
 				return new Sub(b, c);
 			}
@@ -59,5 +60,4 @@ class ConcreteFactory
 			}		
 		}	
 };
-
 #endif //__CONCRETEFACTORY_HPP__

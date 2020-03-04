@@ -24,7 +24,7 @@ public:
         
         char* currInput = *input;
         char curr = *currInput;
-        char save;
+        char* save;
         bool needsBases = false;
 
         for (int i = 0; i < length; ++i) {
@@ -39,7 +39,7 @@ public:
                     ++currInput;
                     curr = *currInput;
                     if (needsBases == true) {
-                        linker = build->getBase(&save, op1, op2);
+                        linker = build->getBase(save, op1, op2);
                         op1 = linker;
                         op2 = nullptr;
                         needsBases = false;
@@ -48,41 +48,23 @@ public:
             }
             else {
                 if ((op2 == nullptr) && curr != ' ') {
-                    save = curr;
+                    save = currInput;
                     ++currInput;
                     curr = *currInput;
+                    if (*save == '*' && curr == '*') {
+                        ++i;
+                        ++currInput;
+                        curr = *currInput;
+                    }
                     needsBases = true;
                 }
             }
         }
         
         
-        /*if (2 < length) {
-            
-            op1 = build->getBase(input[0]);
-            op2 = build->getBase(input[2]);
-            linker = build->getBase(input[1], op1, op2);
-
-            cout << "Test 1\n";
-            
+        if (linker == nullptr && op1 != nullptr) {
+            return op1;
         }
-        
-        for (int i = 3; i < length; i = i + 2) {
-            
-            if (i + 1 < length) {
-                
-                op1 = linker;
-                op2 = build->getBase(input[i+1]);
-                linker = build->getBase(input[i], op1, op2);
-                
-            }
-            
-        }
-        
-       // if (linker != nullptr) {
-       //     cout << linker->stringify() << ' ' << linker->evaluate();
-       // }
-            cout << "Test 2\n";   */
         return linker;
     }
     

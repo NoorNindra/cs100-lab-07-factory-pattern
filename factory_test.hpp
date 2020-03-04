@@ -34,15 +34,15 @@ TEST(OpTestFact, AddFactory) {
 }
 
 TEST(PowTestFact, AddFactory) {
-        string userInput = "4**2";
+        string userInput = "3**2";
         char* ptr1 = &userInput[0];
         char** ptr2 = &ptr1;
 
         Factory* fact = new Factory();
         Base* base = fact->parse(ptr2, userInput.size());
 
-        EXPECT_EQ(base->evaluate(), 8);
-        EXPECT_EQ(base->stringify(), "4.000000 ** 2.000000");
+        EXPECT_EQ(base->evaluate(), 9);
+        EXPECT_EQ(base->stringify(), "3.000000 ** 2.000000");
 }
 
 
