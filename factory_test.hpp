@@ -57,6 +57,30 @@ TEST(FactoryTest, AddSubFactory) {
         EXPECT_EQ(base->stringify(), "5.000000 + 2.000000 - 1.000000");
 }
 
+TEST(FactoryTest, AddMultFactory) {
+        string userInput = "5+2*3";
+        char* ptr1 = &userInput[0];
+        char** ptr2 = &ptr1;
+
+        Factory* fact = new Factory();
+        Base* base = fact->parse(ptr2, userInput.size());
+
+        EXPECT_EQ(base->evaluate(), 21);
+        EXPECT_EQ(base->stringify(), "5.000000 + 2.000000 * 3.000000");
+}
+
+TEST(FactoryTest, AddDivFactory) {
+        string userInput = "5+3/2";
+        char* ptr1 = &userInput[0];
+        char** ptr2 = &ptr1;
+
+        Factory* fact = new Factory();
+        Base* base = fact->parse(ptr2, userInput.size());
+
+        EXPECT_EQ(base->evaluate(), 4);
+        EXPECT_EQ(base->stringify(), "5.000000 + 3.000000 / 2.000000");
+}
+
 TEST(FactoryTest, MultDivFactory) {
         string userInput = "6/2*4";
         char* ptr1 = &userInput[0];
@@ -117,6 +141,28 @@ TEST(FactoryTest, PowDivFactory) {
         EXPECT_EQ(base->stringify(), "2.000000 ** 3.000000 / 2.000000");
 }
 
+TEST(FactoryTest, SubDivFactory) {
+	string userInput = "8-2/3";
+	char* ptr1 = &userInput[0];
+	char** ptr2 = &ptr1;
 
+	Factory* fact = new Factory();
+	Base* base = fact->parse(ptr2, userInput.size());
+
+	EXPECT_EQ(base->evaluate(), 2);
+	EXPECT_EQ(base->stringify(), "8.000000 - 2.000000 / 3.000000");
+}
+
+TEST(FactoryTest, SubMultFactory) {
+        string userInput = "8-2*3";
+        char* ptr1 = &userInput[0];
+        char** ptr2 = &ptr1;
+
+        Factory* fact = new Factory();
+        Base* base = fact->parse(ptr2, userInput.size());
+
+        EXPECT_EQ(base->evaluate(), 18);
+        EXPECT_EQ(base->stringify(), "8.000000 - 2.000000 * 3.000000");
+}
 
 #endif //__FACTORY_TEST_HPP__
